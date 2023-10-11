@@ -10,7 +10,6 @@ public class Main {
         TestDB steve = new TestDB();
         steve.talk();
         steve.setMoney(100);
-        //steve.getMoney();
         System.out.println(steve.getMoney());
     }
 }
