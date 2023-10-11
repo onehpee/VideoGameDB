@@ -16,4 +16,7 @@ public class PracticeTest {
         assertEquals("test", "test");
     }
 
+    @Test
+    public void simpleTest3() { assertEquals(3, 6);}
+
 }
