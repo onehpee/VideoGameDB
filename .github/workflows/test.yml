@@ -11,6 +11,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          architecture: x64
           cache: 'maven'
       - name: Test
-        run: mvn test
+        run: mvn clean test
