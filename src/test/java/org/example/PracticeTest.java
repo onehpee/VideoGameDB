@@ -11,4 +11,9 @@ public class PracticeTest {
         assertEquals(2, 2);
     }
 
+    @Test
+    public void simpleTest(){
+        assertEquals("test", "test");
+    }
+
 }
