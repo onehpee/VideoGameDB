@@ -18,6 +18,15 @@ public class User {
     private String password;
     private String console;
 
+    public User(int id, String firstName, String lastName, String userName, String password, String console) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.console = console;
+    }
+
     public int getId(){
         return id;
     }
@@ -64,5 +73,17 @@ public class User {
 
     public void setConsole(String console){
         this.console=console;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", console='" + console + '\'' +
+                '}';
     }
 }
