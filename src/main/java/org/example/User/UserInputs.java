@@ -23,24 +23,25 @@ public class UserInputs {
     }
 
     // This method determines which field that the user is trying to input
-    public static String getUserInput(UserInputFields fields){
-        String fieldStringDisplay = " ";
-        switch (fields) {
-            case FIRSTNAME:  fieldStringDisplay = "First Name"; break;
-            case LASTNAME: fieldStringDisplay = "Last Name"; break;
-            case USERNAME: fieldStringDisplay = "User Name"; break;
-            case PASSWORD: fieldStringDisplay = "Password"; break;
-            case CONSOLE: fieldStringDisplay = "Console"; break;
-        }
-        return getStringInput(fieldStringDisplay);
-    }
+//    public static String getUserInput(UserInputFields fields){
+//        System.out.println(fields.field);
+//        String fieldStringDisplay = " ";
+//        switch (fields) {
+//            case FIRSTNAME:  fieldStringDisplay = "First Name"; break;
+//            case LASTNAME: fieldStringDisplay = "Last Name"; break;
+//            case USERNAME: fieldStringDisplay = "User Name"; break;
+//            case PASSWORD: fieldStringDisplay = "Password"; break;
+//            case CONSOLE: fieldStringDisplay = "Console"; break;
+//        }
+//        return getStringInput(fieldStringDisplay);
+//    }
 
     // This method returns string input from user dependent on field chosen.
-    private static String getStringInput(String fieldString) {
+    public static String getStringInput(UserInputFields fieldString) {
         String userString = " ";
         while (userString.isBlank()) {
             try{
-                System.out.print("\nPlease Enter " + fieldString + ": ");
+                System.out.print("\nPlease Enter " + fieldString.field + ": ");
                 userString = scanner.getString();
             } catch (InputMismatchException e){
                 System.err.println("WARNING: " + e.getMessage());
