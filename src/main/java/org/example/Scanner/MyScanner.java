@@ -1,15 +1,17 @@
-package org.example.User;
+package org.example.Scanner;
+
+import org.example.Exception.BlankInputException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class UserScanner {
+public class MyScanner {
 
-    private Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
 
     // This methods gets integer values from user.
-    public int getInt() {
+    protected static int getInt() {
         String newIntInput = getString();
         int newIntValue;
         try{
@@ -21,14 +23,14 @@ public class UserScanner {
     }
 
     // This method gets string values from user.
-    public String getString() {
+    protected static String getString() {
         String stringValue = scanner.nextLine();
-        if (stringValue.isBlank()) throw new InputMismatchException("Incorrect Input - Please Enter Value");
+        if (stringValue.isBlank()) throw new BlankInputException();
         return stringValue;
     }
 
     // This method closes the scanner to prevent leakage.
-    public void closeScanner() {
+    protected static void closeScanner() {
         scanner.close();
     }
 }

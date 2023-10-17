@@ -1,10 +1,11 @@
 package org.example.User;
 
-import java.util.InputMismatchException;
+import org.example.Exception.BlankInputException;
+import org.example.Scanner.MyScanner;
 
-public class UserInputs {
+import java.util.Scanner;
 
-  static UserScanner scanner = new UserScanner();
+public class UserInputs extends MyScanner {
 
   // This method gets ID input value from user.
   public static int getIDInput() {
@@ -12,15 +13,36 @@ public class UserInputs {
         while (intInput < 0) {
             try {
                 System.out.print("\nPlease Enter User ID#: ");
-                intInput = scanner.getInt();
-            } catch (InputMismatchException e) {
+                intInput = getInt();
+            } catch (Exception e) {
                 System.err.println("WARNING: " + e.getMessage());
                 System.out.println();
             }
         }
-
         return intInput;
     }
+
+    // This method returns string input from user dependent on field chosen.
+    public static String getStringInput(UserInputFields fieldString) {
+        String userString = " ";
+        while (userString.isBlank()) {
+            try{
+                System.out.print("\nPlease Enter " + fieldString.field + ": ");
+                userString = getString();
+            } catch (BlankInputException e){
+                System.err.println("WARNING: " + e.getMessage());
+                System.out.println();
+            }
+        }
+        return userString;
+    }
+
+    public static void closeScanner(){
+      MyScanner.closeScanner();
+    }
+
+// -----------------------------------------------DEAD METHODS------------------------------------------------------------------//
+
 
     // This method determines which field that the user is trying to input
 //    public static String getUserInput(UserInputFields fields){
@@ -35,25 +57,6 @@ public class UserInputs {
 //        }
 //        return getStringInput(fieldStringDisplay);
 //    }
-
-    // This method returns string input from user dependent on field chosen.
-    public static String getStringInput(UserInputFields fieldString) {
-        String userString = " ";
-        while (userString.isBlank()) {
-            try{
-                System.out.print("\nPlease Enter " + fieldString.field + ": ");
-                userString = scanner.getString();
-            } catch (InputMismatchException e){
-                System.err.println("WARNING: " + e.getMessage());
-                System.out.println();
-            }
-        }
-        return userString;
-    }
-
-    public static void closeScanner(){
-        scanner.closeScanner();
-    }
 
 //    public static String getFirstNameInput() {
 //        String firstName = "";
