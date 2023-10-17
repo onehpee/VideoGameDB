@@ -11,7 +11,7 @@ public class UserScanner {
     // This methods gets integer values from user.
     public int getInt() {
         String newIntInput = getString();
-        int newIntValue = 0;
+        int newIntValue;
         try{
            newIntValue = Integer.parseInt(newIntInput);
         } catch (NumberFormatException e) {

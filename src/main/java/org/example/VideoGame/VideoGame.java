@@ -1,4 +1,4 @@
-package org.example.User;
+package org.example.VideoGame;
 
 import java.util.Date;
 
