@@ -13,13 +13,24 @@ public class MyScanner {
     // This methods gets integer values from user.
     protected static int getInt() {
         String newIntInput = getString();
-        int newIntValue = 0;
+        int newIntValue;
         try{
            newIntValue = Integer.parseInt(newIntInput);
         } catch (NumberFormatException e) {
             throw new InputMismatchException("Incorrect Input - Please Enter Numerical Values Only");
         }
         return newIntValue;
+    }
+
+    protected static double getDouble(){
+        String newDoubleInput = getString();
+        double newDoubleValue;
+        try {
+            newDoubleValue = Double.parseDouble(newDoubleInput);
+        }catch (NumberFormatException e){
+            throw  new InputMismatchException("Incorrect Input - Please Enter Numerical Values Only");
+        }
+        return newDoubleValue;
     }
 
     // This method gets string values from user.
