@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 public class VideoGameInputs extends MyScanner{
     //static UserScanner scanner = new UserScanner();
 
-    public static int getIDInput(){
+    public static int getVideoGameIDInput(){
         int intInput = -1;
         while (intInput < 0){
             try {
@@ -36,11 +36,11 @@ public class VideoGameInputs extends MyScanner{
         return doubleInput;
     }
 
-    public static String getStringInput(VideoGameInputFields fieldString){
+    public static String getStringInput2(VideoGameInputFields fieldString){
         String userString = " ";
         while (userString.isBlank()){
             try {
-                System.out.println("Please Enter " + fieldString.field + ": " );
+                System.out.println("\nPlease Enter " + fieldString.field + ": ");
                 userString = getString();
             }catch (InputMismatchException e){
                 System.err.println("WARNING: " + e.getMessage());

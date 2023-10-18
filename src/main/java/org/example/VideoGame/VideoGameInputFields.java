@@ -4,7 +4,9 @@ public enum VideoGameInputFields {
     TITLE("Title"),
     RATING("Rating"),
 
-    CONSOLE("Console");
+    RELEASEDATE("Release Date"),
+
+    CONSOLE2("Console");
 
     public final String field;
 
