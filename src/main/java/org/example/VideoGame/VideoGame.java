@@ -6,11 +6,11 @@ public class VideoGame {
     private int id;
     private String title;
     private String rating;
-    private int price;
+    private double price;
     private Date releaseDate;
     private String console;
 
-    public VideoGame(int id, String title, String rating, int price, Date releaseDate, String console) {
+    public VideoGame(int id, String title, String rating, double price, Date releaseDate, String console) {
         this.id = id;
         this.title=title;
         this.rating=rating;
@@ -43,11 +43,11 @@ public class VideoGame {
         this.rating = rating;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

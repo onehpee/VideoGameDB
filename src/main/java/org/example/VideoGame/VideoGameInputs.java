@@ -22,7 +22,19 @@ public class VideoGameInputs extends MyScanner{
         return intInput;
     }
 
-    //public static double getPrice(){}
+    public static double getPrice(){
+        double doubleInput = -1;
+        while (doubleInput < 0){
+            try {
+                System.out.println("\nPlease Enter Video Game Price: ");
+                doubleInput = getDouble();
+            }catch (InputMismatchException e){
+                System.err.println("WARNING: " + e.getMessage());
+                System.out.println();
+            }
+        }
+        return doubleInput;
+    }
 
     public static String getStringInput(VideoGameInputFields fieldString){
         String userString = " ";
