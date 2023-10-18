@@ -12,7 +12,7 @@ public class VideoGameInputs extends MyScanner{
         int intInput = -1;
         while (intInput < 0){
             try {
-                System.out.println("\nPlease Enter Video Game ID#: ");
+                System.out.print("\nPlease Enter Video Game ID#: ");
                 intInput = getInt();
             }catch (InputMismatchException e){
                 System.err.println("WARNING: " + e.getMessage());
@@ -26,7 +26,7 @@ public class VideoGameInputs extends MyScanner{
         double doubleInput = -1;
         while (doubleInput < 0){
             try {
-                System.out.println("\nPlease Enter Video Game Price: ");
+                System.out.print("\nPlease Enter Video Game Price: ");
                 doubleInput = getDouble();
             }catch (InputMismatchException e){
                 System.err.println("WARNING: " + e.getMessage());
@@ -40,7 +40,7 @@ public class VideoGameInputs extends MyScanner{
         String userString = " ";
         while (userString.isBlank()){
             try {
-                System.out.println("\nPlease Enter " + fieldString.field + ": ");
+                System.out.print("\nPlease Enter " + fieldString.field + ": ");
                 userString = getString();
             }catch (InputMismatchException e){
                 System.err.println("WARNING: " + e.getMessage());
