@@ -37,7 +37,7 @@ public class MyScanner {
     protected static String getString() {
         String stringValue = scanner.nextLine();
         if (stringValue.isBlank()) throw new BlankInputException();
-        return stringValue;
+        return stringValue.trim();
     }
 
     // This method closes the scanner to prevent leakage.
