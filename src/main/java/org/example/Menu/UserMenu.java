@@ -1,5 +1,6 @@
 package org.example.Menu;
 
+import org.example.Exception.ChoiceOutOfRangeException;
 import org.example.Scanner.MyScanner;
 
 import java.lang.reflect.Array;
@@ -25,14 +26,9 @@ public class UserMenu extends MyScanner {
     public int menu(MenuFields menuField) {
         String[] menuDisplay = getMenu(menuField);
         int menuChoice = 0;
-        int bound = menuDisplay.length;
-        while (menuChoice < 1 || menuChoice > bound){
+        while (menuChoice < 1 || menuChoice > menuDisplay.length){
             try {
-                System.out.println("\n*** " + menuField.field + " ***");
-                for (int i = 0; i < bound; i++){
-                    System.out.println(i+1 + ". " + menuDisplay[i]);
-                }
-                menuChoice = getChoice(bound);
+                menuChoice = getChoice(menuField.field, menuDisplay);
             } catch (Exception e) {
                 System.err.println("WARNING: " + e.getMessage());
                 System.out.println();
@@ -41,13 +37,16 @@ public class UserMenu extends MyScanner {
         return menuChoice;
     }
 
-    private int getChoice(int end) {
-        int choice = 0;
+    private int getChoice(String menuTitleDisplay, String[] menuDisplay) {
+        System.out.println("\n*** " + menuTitleDisplay + " ***");
+        int end = menuDisplay.length;
+        for (int i = 0; i < end; i++){
+            System.out.println(i+1 + ". " + menuDisplay[i]);
+        }
         System.out.print("\nEnter Choice: ");
-        choice = getInt();
-        System.out.println();
+        int choice = getInt();
         if (choice < 1 || choice > end)
-            throw new InputMismatchException("Please Between " + 1 + " - " + end);
+            throw new ChoiceOutOfRangeException(end);
         return choice;
     }
 

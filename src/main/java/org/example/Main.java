@@ -6,6 +6,8 @@ import org.example.User.User;
 import org.example.User.UserInputs;
 import org.example.VideoGame.VideoGame;
 
+import java.time.LocalDate;
+
 import static org.example.User.UserInputs.*;
 import static org.example.User.UserInputFields.*;
 import static org.example.VideoGame.VideoGameInputFields.*;
@@ -32,10 +34,14 @@ public class Main {
 //        System.out.println("\nMade Video Game With The Following Values: \n");
 //        System.out.println(new VideoGame(gameID,title, rating,price,releaseDate, console2));
 
-        new UserMenu().menu(MenuFields.MAIN);
-        new UserMenu().menu(MenuFields.USER_MENU);
-        new UserMenu().menu(MenuFields.SEARCH);
-        new UserMenu().menu(MenuFields.DELETE);
-        new UserMenu().menu(MenuFields.DISPLAY);
+//        new UserMenu().menu(MenuFields.MAIN);
+//        new UserMenu().menu(MenuFields.USER_MENU);
+//        new UserMenu().menu(MenuFields.SEARCH);
+//        new UserMenu().menu(MenuFields.DELETE);
+//        new UserMenu().menu(MenuFields.DISPLAY);
+
+        LocalDate date = getDateInput();
+        double price = getPrice();
+        System.out.println(price);
     }
 }

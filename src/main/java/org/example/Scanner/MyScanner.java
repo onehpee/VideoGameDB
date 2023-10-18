@@ -2,6 +2,9 @@ package org.example.Scanner;
 
 import org.example.Exception.BlankInputException;
 
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -30,7 +33,21 @@ public class MyScanner {
         }catch (NumberFormatException e){
             throw  new InputMismatchException("Incorrect Input - Please Enter Numerical Values Only");
         }
-        return newDoubleValue;
+        DecimalFormat df = new DecimalFormat("0.00");
+        return Double.parseDouble(df.format(newDoubleValue));
+    }
+
+    protected static LocalDate getDate() {
+        String newIntInput = getString();
+        String dateFormat = "MM/dd/yyyy";
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat);
+        LocalDate date;
+        try{
+            date = LocalDate.parse(newIntInput, dateTimeFormatter);
+        } catch(Exception e) {
+            throw new InputMismatchException("Incorrect Input - Date In Following Format (" + dateFormat + ")");
+        }
+        return date;
     }
 
     // This method gets string values from user.
