@@ -7,10 +7,10 @@ public class VideoGame {
     private String title;
     private String rating;
     private double price;
-    private Date releaseDate;
+    private String releaseDate;
     private String console;
 
-    public VideoGame(int id, String title, String rating, double price, Date releaseDate, String console) {
+    public VideoGame(int id, String title, String rating, double price, String releaseDate, String console) {
         this.id = id;
         this.title=title;
         this.rating=rating;
@@ -51,11 +51,11 @@ public class VideoGame {
         this.price = price;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -65,5 +65,16 @@ public class VideoGame {
 
     public void setConsole(String console) {
         this.console = console;
+    }
+
+    public String toString() {
+        return "Video Game{" +
+                "id=" + id +
+                ", Title='" + title + '\'' +
+                ", Rating='" + rating + '\'' +
+                ", Price='" + price + '\'' +
+                ", Release Date='" + releaseDate + '\'' +
+                ", console='" + console + '\'' +
+                '}';
     }
 }
