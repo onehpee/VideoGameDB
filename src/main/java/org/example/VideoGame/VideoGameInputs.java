@@ -1,18 +1,19 @@
 package org.example.VideoGame;
 
-import org.example.User.UserScanner;
+import org.example.Scanner.MyScanner;
+
 
 import java.util.InputMismatchException;
 
-public class VideoGameInputs {
-    static UserScanner scanner = new UserScanner();
+public class VideoGameInputs extends MyScanner{
+    //static UserScanner scanner = new UserScanner();
 
     public static int getIDInput(){
         int intInput = -1;
         while (intInput < 0){
             try {
                 System.out.println("\nPlease Enter Video Game ID#: ");
-                intInput = scanner.getInt();
+                intInput = getInt();
             }catch (InputMismatchException e){
                 System.err.println("WARNING: " + e.getMessage());
                 System.out.println();
@@ -21,12 +22,14 @@ public class VideoGameInputs {
         return intInput;
     }
 
+    //public static double getPrice(){}
+
     public static String getStringInput(VideoGameInputFields fieldString){
         String userString = " ";
         while (userString.isBlank()){
             try {
                 System.out.println("Please Enter " + fieldString.field + ": " );
-                userString = scanner.getString();
+                userString = getString();
             }catch (InputMismatchException e){
                 System.err.println("WARNING: " + e.getMessage());
                 System.out.println();
@@ -35,9 +38,7 @@ public class VideoGameInputs {
         return userString;
     }
 
-    public static void closeScanner(){
-        scanner.closeScanner();
-    }
+    //public static void closeScanner(){}
 }
 
 

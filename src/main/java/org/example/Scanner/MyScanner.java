@@ -22,6 +22,17 @@ public class MyScanner {
         return newIntValue;
     }
 
+    protected static double getDouble(){
+        String newDoubleInput = getString();
+        double newDoubleValue;
+        try {
+            newDoubleValue = Double.parseDouble(newDoubleInput);
+        }catch (NumberFormatException e){
+            throw  new InputMismatchException("Incorrect Input - Please Enter Numerical Values Only");
+        }
+        return newDoubleValue;
+    }
+
     // This method gets string values from user.
     protected static String getString() {
         String stringValue = scanner.nextLine();
