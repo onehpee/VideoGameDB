@@ -1,5 +1,6 @@
 package org.example.VideoGame;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class VideoGame {
@@ -7,10 +8,10 @@ public class VideoGame {
     private String title;
     private String rating;
     private double price;
-    private String releaseDate;
+    private LocalDate releaseDate;
     private String console;
 
-    public VideoGame(int id, String title, String rating, double price, String releaseDate, String console) {
+    public VideoGame(int id, String title, String rating, double price, LocalDate releaseDate, String console) {
         this.id = id;
         this.title=title;
         this.rating=rating;
@@ -51,11 +52,11 @@ public class VideoGame {
         this.price = price;
     }
 
-    public String getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -76,5 +77,10 @@ public class VideoGame {
                 ", Release Date='" + releaseDate + '\'' +
                 ", console='" + console + '\'' +
                 '}';
+    }
+
+    public void displayGame(){
+        System.out.printf("| %-5s | %-50s | %-6s | %-10s | %-4s | %-5s %n",
+                id, title, "  " +rating, "  $"+ price, " " + releaseDate, console);
     }
 }

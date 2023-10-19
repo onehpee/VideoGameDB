@@ -37,6 +37,35 @@ public class UserMenu extends MyScanner {
         return menuChoice;
     }
 
+    public int profileUserMenu(String userName) {
+        String[] menuDisplay = getMenu(MenuFields.USER_MENU);
+        int menuChoice = 0;
+        while (menuChoice < 1 || menuChoice > menuDisplay.length){
+            try {
+                menuChoice = getChoice(userName ,MenuFields.USER_MENU.field, menuDisplay);
+            } catch (Exception e) {
+                System.err.println("WARNING: " + e.getMessage());
+                System.out.println();
+            }
+        }
+        return menuChoice;
+    }
+
+    private int getChoice(String userName, String menuTitleDisplay, String[] menuDisplay) {
+        System.out.println("\n*** " + menuTitleDisplay + " ***");
+        System.out.println("Hello, " + userName);
+        int end = menuDisplay.length;
+        for (int i = 0; i < end; i++){
+
+            System.out.println(i+1 + ". " + menuDisplay[i]);
+        }
+        System.out.print("\nEnter Choice: ");
+        int choice = getInt();
+        if (choice < 1 || choice > end)
+            throw new ChoiceOutOfRangeException(end);
+        return choice;
+    }
+
     private int getChoice(String menuTitleDisplay, String[] menuDisplay) {
         System.out.println("\n*** " + menuTitleDisplay + " ***");
         int end = menuDisplay.length;
