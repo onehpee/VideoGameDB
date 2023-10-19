@@ -64,6 +64,7 @@ public class VideoGameService {
                 "-----------------------------------" +
                 "-----------------------------------------------%n");
         videoGames.stream().sorted(Comparator.comparing(VideoGame::getId)).forEach(VideoGame::displayGame);
+
     }
     public void addNewGame(VideoGame newVideoGame) {
         videoGames.add(newVideoGame);

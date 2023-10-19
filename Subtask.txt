@@ -1,0 +1,43 @@
+Week 1 - Tasks
+
+Login Service Task:
+1. UserName Verification -- DONE
+2. Password Verification -- DONE
+3. Test -- Uyi
+
+
+Register Service Task:
+1. UserName Verification  -- Uyi
+        - Check If UserName Exists
+            - If exists throw error
+
+2. Password Verification -- Ade
+        - Password Regex
+            - If does not match throw error
+        - Check If Password Exists
+            - If exists throw error
+
+3. ID Functionality -- Uyi & Ade
+        - Test
+
+4. Verify User Saves To Database -- Uyi & Ade
+
+5. Test
+
+
+
+
+
+
+
+Future Week TBD:
+
+
+Database Task:
+1. Setup Database -- Ade
+2. Make UserDAO Interface
+3. Make VideoGameDAO Interface
+4. UserDAO Implementation (Real & Fake)
+5. VideoGameDAO Implementation (Real & Fake)
+6. Test
+7. Document
