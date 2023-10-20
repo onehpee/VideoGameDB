@@ -1,5 +1,7 @@
 package org.example.VideoGame;
 
+import org.example.Menu.MenuFields;
+import org.example.Menu.UserMenu;
 import org.example.User.UserDTO;
 
 import java.time.LocalDate;
@@ -7,12 +9,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VideoGameService {
 
-    private List<VideoGame> videoGames = new ArrayList<>();
-
+    private final VideoGamesDAO videoGames;
     private int videoGameID = 0;
+
+    public VideoGameService(VideoGamesDAO videoGames) {
+        this.videoGames = videoGames;
+    }
 
     public void addService(UserDTO userDTO){
         System.out.println("*** Add Game ***");
@@ -21,23 +27,53 @@ public class VideoGameService {
         double price = VideoGameInputs.getPrice();
         LocalDate releaseDate = VideoGameInputs.getDateInput();
         String console = VideoGameInputs.getStringInput2(VideoGameInputFields.CONSOLE2);
-        addNewGame(new VideoGame(++videoGameID, title, rating, price, releaseDate, console));
+        videoGames.saveGame(new VideoGame(++videoGameID, title, rating, price, releaseDate, console));
+    }
+
+    public void searchService(UserDTO userDTO, UserMenu userMenu) {
+        int choice = 0;
+        while (choice != 3){
+            choice = userMenu.menu(MenuFields.SEARCH);
+            if (choice == 3) break;
+            VideoGame searchVideoGame = (choice == 1) ? searchByID() : searchByTitle();
+            displayVideoGame(searchVideoGame);
+        }
+    }
+
+    public void deleteService(UserDTO userDTO, UserMenu userMenu) {
+        int choice = 0;
+        while (choice != 4){
+            choice = userMenu.menu(MenuFields.DELETE);
+            if (choice == 4) break;
+            else if (choice == 1) deleteGameByID(userDTO.userID());
+            else if (choice == 2) deleteGameByTitle(userDTO.userID());
+            else deleteAll();
+        }
+    }
+
+    public void displayService(UserDTO userDTO, UserMenu userMenu) {
+        int choice = 0;
+        while (choice != 4) {
+            choice = userMenu.menu(MenuFields.DISPLAY);
+            List<VideoGame> videoGameList = null;
+            if (choice == 4) break;
+            else if (choice == 1) videoGameList = displayAllGames(userDTO.userID());
+            else if (choice == 2) videoGameList = displayGamesByRating(userDTO.userID());
+            else if (choice == 3) videoGameList = displayGamesByConsole(userDTO.userID());
+            displayAllVideoGames(videoGameList);
+        }
     }
 
     private VideoGame searchByTitle(){
-        System.out.println("*** Search (Title) ***");
+        System.out.println("\n*** Search (Title) ***");
         String title = VideoGameInputs.getStringInput2(VideoGameInputFields.TITLE);
-        return getGameByTitle(title);
+        return videoGames.getVideoGameByTitle(title);
     }
 
     private VideoGame searchByID(){
-        System.out.println("*** Search (ID) ***");
+        System.out.println("\n*** Search (ID) ***");
         int id = VideoGameInputs.getVideoGameIDInput();
-        return getGameByID(id);
-    }
-
-    public void displayService() {
-        displayAllVideoGames(videoGames);
+        return videoGames.getVideoGameByID(id);
     }
 
     public void displayVideoGame(VideoGame videoGame) {
@@ -54,7 +90,8 @@ public class VideoGameService {
         videoGame.displayGame();
     }
 
-    private void displayAllVideoGames(List<VideoGame> videoGames) {
+    private void displayAllVideoGames(List<VideoGame> videoGameList) {
+        if (videoGameList == null) return;
         System.out.printf("---------------------------------" +
                 "-----------------------------------" +
                 "-----------------------------------------------%n");
@@ -63,24 +100,46 @@ public class VideoGameService {
         System.out.printf("---------------------------------" +
                 "-----------------------------------" +
                 "-----------------------------------------------%n");
-        videoGames.stream().sorted(Comparator.comparing(VideoGame::getId)).forEach(VideoGame::displayGame);
+        videoGameList.stream().sorted(Comparator.comparing(VideoGame::getId)).forEach(VideoGame::displayGame);
 
     }
-    public void addNewGame(VideoGame newVideoGame) {
-        videoGames.add(newVideoGame);
+
+    private List<VideoGame> displayAllGames(int userID) {
+        System.out.println("*** Display (All) ***\n");
+        return videoGames.getAllVideoGames();
+    }
+    private List<VideoGame> displayGamesByRating(int userID) {
+        System.out.println("*** Display (Rating) ***\n");
+        String rating = VideoGameInputs.getStringInput2(VideoGameInputFields.RATING);
+        return videoGames.getVideoGamesByRating(rating);
     }
 
-    private VideoGame getGameByTitle(String title) {
-        return videoGames.stream()
-                .filter(game -> game.getTitle().equals(title))
-                .findFirst()
-                .orElse(null);
+    private List<VideoGame> displayGamesByConsole(int userID) {
+        System.out.println("*** Display (Console) ***\n");
+        String console = VideoGameInputs.getStringInput2(VideoGameInputFields.CONSOLE2);
+        return videoGames.getVideoGamesByConsole(console);
     }
 
-    private VideoGame getGameByID(int id) {
-        return videoGames.stream()
-                .filter(game -> game.getId() == id)
-                .findFirst()
-                .orElse(null);
+    private void deleteGameByID(int userID){
+        System.out.println("*** Delete (ID) ***");
+        int videoGameID = VideoGameInputs.getVideoGameIDInput();
+        VideoGame deleteGame = videoGames.getVideoGameByID(videoGameID);
+        if (deleteGame == null) return;
+        System.out.println(deleteGame.getTitle() + " Has Been Removed From Database\n");
+    }
+
+    private void deleteGameByTitle(int userID){
+        System.out.println("*** Delete (Title) ***");
+        String videoGameTitle = VideoGameInputs.getStringInput2(VideoGameInputFields.TITLE);
+        VideoGame deleteGame = videoGames.getVideoGameByTitle(videoGameTitle);
+        if (deleteGame == null) return;
+        System.out.println(deleteGame.getTitle() + " Has Been Removed From Database\n");
+    }
+
+    private void deleteAll() {
+        System.out.println("*** Delete (All) ***");
+        if (videoGames.getAllVideoGames() == null) System.out.println("Database Is Empty\n");
+        videoGames.deleteAllGames();
+        System.out.println("\nDatabase Has Been Cleared\n");
     }
 }
