@@ -21,15 +21,6 @@ public class FakeUserDAOImp implements UserDAO{
     }
 
     @Override
-    public UserDTO findByUserName(String userName) {
-        return userList.stream()
-                .filter(user -> user.getUserName().equals(userName))
-                .findFirst()
-                .map(user -> new UserDTO(user.getId(), user.getUserName()))
-                .orElse(null);
-    }
-
-    @Override
     public UserDTO findByUserNameAndPassword(String userName, String passWord) {
         return userList.stream()
                 .filter(user -> user.getUserName().equals(userName) && user.getPassword().equals(passWord))
@@ -65,8 +56,4 @@ public class FakeUserDAOImp implements UserDAO{
         userList.add(newUser);
     }
 
-    @Override
-    public void print(){
-        userList.stream().forEach(User::toString);
-    }
 }
