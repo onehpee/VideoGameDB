@@ -2,11 +2,8 @@ package org.example;
 
 import org.example.Menu.MenuFields;
 import org.example.Menu.UserMenu;
-import org.example.User.User;
-import org.example.User.UserInputs;
-import org.example.User.UserService;
+import org.example.User.*;
 import org.example.VideoGame.*;
-import org.example.User.UserDTO;
 
 import java.time.LocalDate;
 
@@ -18,7 +15,7 @@ import static org.example.VideoGame.VideoGameInputs.*;
 public class Main {
     public static void main(String[] args) {
         UserMenu userMenu = new UserMenu();
-        UserService userService = new UserService();
+        UserService userService = new UserService(new FakeUserDAOImp());
         userService.registerService();
         int mainMenuChoice = 0;
         while (mainMenuChoice != 3){
