@@ -2,12 +2,13 @@ package org.example;
 
 import org.example.Menu.MenuFields;
 import org.example.Menu.UserMenu;
+import org.example.Repo.UserRepo;
 import org.example.User.*;
 
 public class Main {
     public static void main(String[] args) {
         UserMenu userMenu = new UserMenu();
-        UserService userService = new UserService(new FakeUserDAOImp());
+        UserService userService = new UserService(new UserRepo());
         int mainMenuChoice = 0;
         while (mainMenuChoice != 3){
             mainMenuChoice = userMenu.menu(MenuFields.MAIN);
