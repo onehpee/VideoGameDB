@@ -3,6 +3,7 @@ package org.example.Repo;
 import org.example.User.User;
 import org.example.User.UserDAO;
 import org.example.User.UserDTO;
+import org.example.User.UserService;
 
 import java.sql.*;
 import java.util.Map;
@@ -44,32 +45,122 @@ public class UserRepo extends RepoInfo implements UserDAO{
     }
 
     public static void main(String[] args){
-        new UserRepo().saveUser(new User(1,"Ade","Uwen", "Mysterio619","619", "PS5"));
+      // new UserRepo().saveUser(new User(1,"Ade","Uwen", "Mysterio619","619", "PS5"));
+      //  new UserRepo().saveUser(new User(2,"Uyi","Omofonmwan", "Africanking","555", "PS2"));
+      //  new UserRepo().saveUser(new User(3,"Lil","Wayne", "Weezy","444", "Xbox"));
+      // System.out.println(new UserRepo().findByUserNameAndPassword("Mysterio619", "619"));
+      //  System.out.println(new UserRepo().findByID());
+       //System.out.println(new UserRepo().checkIfIDExists());
+        System.out.println(new UserRepo().checkIfUserNameExists("Mysterio619"));
+ //       System.out.println(new UserRepo().checkIfPasswordExists("444"));
     }
 
     @Override
     public UserDTO findByID(int id) {
-        return null;
+        String query = "select * from user where UserID=?";
+        Connection conn = getConnection();
+        UserDTO userDTO = null;
+        try {
+            // create the java statement
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1,id);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                String dbUserName = rs.getString(4);
+                userDTO = new UserDTO(id,dbUserName);
+            }
+            conn.close();
+        }catch (SQLException e){
+            // System.out.println("Error Caught: " + e.printStackTrace(););
+            e.printStackTrace();
+        }
+        return userDTO;
     }
 
     @Override
     public UserDTO findByUserNameAndPassword(String userName, String passWord) {
-        return null;
+        String query = "select * from user where UserName= ? AND Password = ?";
+        Connection conn = getConnection();
+        UserDTO userDTO = null;
+        try {
+            // create the java statement
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1,userName);
+            st.setString(2,passWord);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()){
+                int dbUserID = rs.getInt(1);
+                userDTO = new UserDTO(dbUserID,userName);
+            }
+            conn.close();
+        }catch (SQLException e){
+            // System.out.println("Error Caught: " + e.printStackTrace(););
+            e.printStackTrace();
+        }
+        return userDTO;
     }
 
     @Override
     public boolean checkIfIDExists(int id) {
-        return false;
+        String query = "SELECT UserID FROM User WHERE EXISTS(SELECT UserID FROM User WHERE UserID=?)" ;
+        Connection conn = getConnection();
+        boolean test = false;
+        try {
+            // create the java statement
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1,id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()){
+                test = rs.getBoolean(1);
+            }
+            conn.close();
+        }catch (SQLException e){
+            // System.out.println("Error Caught: " + e.printStackTrace(););
+            e.printStackTrace();
+        }
+        return test;
     }
 
     @Override
     public boolean checkIfUserNameExists(String userName) {
-        return false;
+        String query = "SELECT UserName FROM User WHERE EXISTS(SELECT UserName FROM User WHERE UserName=?)" ;
+        Connection conn = getConnection();
+        boolean test = false;
+        try {
+            // create the java statement
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1,userName);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()){
+                test = rs.getBoolean(1);
+            }
+            conn.close();
+        }catch (SQLException e){
+            // System.out.println("Error Caught: " + e.printStackTrace(););
+            e.printStackTrace();
+        }
+        return test;
     }
 
     @Override
     public boolean checkIfPasswordExists(String passWord) {
-        return false;
+        String query = "SELECT Password FROM user WHERE EXISTS(SELECT Password FROM user WHERE Password=?)";
+        Connection conn = getConnection();
+        boolean test = false;
+        try {
+            // create the java statement
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1,passWord);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()){
+                test = rs.getBoolean(1);
+            }
+            conn.close();
+        }catch (SQLException e){
+            // System.out.println("Error Caught: " + e.printStackTrace(););
+            e.printStackTrace();
+        }
+        return test;
     }
 
 }
