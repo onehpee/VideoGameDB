@@ -18,6 +18,14 @@ public class User {
     private String password;
     private String console;
 
+    public User(String firstName, String lastName, String userName, String password, String console){
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.userName=userName;
+        this.password=password;
+        this.console=console;
+    }
+
     public User(int id, String firstName, String lastName, String userName, String password, String console) {
         this.id = id;
         this.firstName = firstName;
