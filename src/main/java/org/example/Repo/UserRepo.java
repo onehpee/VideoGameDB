@@ -50,9 +50,9 @@ public class UserRepo extends RepoInfo implements UserDAO{
       //  new UserRepo().saveUser(new User(3,"Lil","Wayne", "Weezy","444", "Xbox"));
       // System.out.println(new UserRepo().findByUserNameAndPassword("Mysterio619", "619"));
       //  System.out.println(new UserRepo().findByID());
-       //System.out.println(new UserRepo().checkIfIDExists());
-        System.out.println(new UserRepo().checkIfUserNameExists("Mysterio619"));
- //       System.out.println(new UserRepo().checkIfPasswordExists("444"));
+       //System.out.println(new UserRepo().checkIfIDExists(1));
+      // System.out.println(new UserRepo().checkIfUserNameExists("Mysterio619"));
+       // System.out.println(new UserRepo().checkIfPasswordExists("555"));
     }
 
     @Override
@@ -110,9 +110,7 @@ public class UserRepo extends RepoInfo implements UserDAO{
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1,id);
             ResultSet rs = st.executeQuery();
-            if (rs.next()){
-                test = rs.getBoolean(1);
-            }
+            test = rs.next();
             conn.close();
         }catch (SQLException e){
             // System.out.println("Error Caught: " + e.printStackTrace(););
@@ -123,7 +121,7 @@ public class UserRepo extends RepoInfo implements UserDAO{
 
     @Override
     public boolean checkIfUserNameExists(String userName) {
-        String query = "SELECT UserName FROM User WHERE EXISTS(SELECT UserName FROM User WHERE UserName=?)" ;
+        String query = "SELECT UserName FROM User as U WHERE EXISTS(SELECT UserName FROM user WHERE U.UserName=?)" ;
         Connection conn = getConnection();
         boolean test = false;
         try {
@@ -131,9 +129,7 @@ public class UserRepo extends RepoInfo implements UserDAO{
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1,userName);
             ResultSet rs = st.executeQuery();
-            if (rs.next()){
-                test = rs.getBoolean(1);
-            }
+            test = rs.next();
             conn.close();
         }catch (SQLException e){
             // System.out.println("Error Caught: " + e.printStackTrace(););
@@ -152,9 +148,7 @@ public class UserRepo extends RepoInfo implements UserDAO{
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1,passWord);
             ResultSet rs = st.executeQuery();
-            if (rs.next()){
-                test = rs.getBoolean(1);
-            }
+            test = rs.next();
             conn.close();
         }catch (SQLException e){
             // System.out.println("Error Caught: " + e.printStackTrace(););

@@ -16,7 +16,6 @@ public class UserService {
         this.userDAO = userDAO;
         this.videoGameService = new VideoGameService(new FakeVideoGameDAOImp());
     }
-    private int userID = 0;
 
     public UserDTO loginService() {
         System.out.println("\n*** LOGIN ***");
@@ -32,9 +31,9 @@ public class UserService {
         String userName = getValueAfterVerification(UserInputFields.USERNAME);
         String password = getValueAfterVerification(UserInputFields.PASSWORD);
         String console = UserInputs.getStringInput(UserInputFields.CONSOLE);
-        User newUser = new User(++userID, firstName, lastName, userName, password,console);
+        User newUser = new User(firstName, lastName, userName, password,console);
         userDAO.saveUser(newUser);
-        return userDAO.findByID(newUser.getId());
+        return userDAO.findByUserNameAndPassword(newUser.getUserName(), newUser.getPassword());
     }
 
     public void fullService(UserDTO userDTO) {
