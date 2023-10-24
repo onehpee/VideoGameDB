@@ -28,12 +28,8 @@ public class VideoGameRepo extends RepoInfo implements VideoGamesDAO {
 
     @Override
     public void saveGame(VideoGame videoGame, int userID) {
-        String query = "INSERT INTO videogame2(UserID,Title, Rating,Price,Console) values(?,?,?,?,?)";
+        String query = "INSERT INTO videogame2(UserID,Title, Rating,Price, ReleaseDate, Console) values(?,?,?,?,?,?)";
         Connection conn = getConnection();
-        int day = videoGame.getReleaseDate().getDayOfMonth();
-        int month = videoGame.getReleaseDate().getMonthValue();
-        int year = videoGame.getReleaseDate().getYear();
-        Date date = new Date(year,month,day);
         try {
             // create the java statement
             PreparedStatement st = conn.prepareStatement(query);
@@ -41,8 +37,8 @@ public class VideoGameRepo extends RepoInfo implements VideoGamesDAO {
             st.setString(2,videoGame.getTitle());
             st.setString(3, videoGame.getRating());
             st.setDouble(4,videoGame.getPrice());
-          //  st.setDate(5, date);
-            st.setString(5, videoGame.getConsole());
+            st.setDate(5, java.sql.Date.valueOf(videoGame.getReleaseDate()));
+            st.setString(6, videoGame.getConsole());
             st.execute();
             conn.close();
         }catch (SQLException e){
@@ -53,7 +49,7 @@ public class VideoGameRepo extends RepoInfo implements VideoGamesDAO {
 
     public static void main(String[] args){
         VideoGameRepo videoGameRepo = new VideoGameRepo();
-        videoGameRepo.saveGame(new VideoGame(1,"Tetris", "M", 5.99, LocalDate.now(), "xbox"), 1);
+        videoGameRepo.saveGame(new VideoGame("God of War", "M", 29.99, LocalDate.now(), "Playstation 2"), 1);
     }
 
     @Override
