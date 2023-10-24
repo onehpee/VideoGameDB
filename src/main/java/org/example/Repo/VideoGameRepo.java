@@ -15,12 +15,12 @@ public class VideoGameRepo extends RepoInfo implements VideoGamesDAO {
         String username = dbInfo.get("onehpee_DBUsername");
         String password = dbInfo.get("onehpee_DBPassword");
 
-        System.out.println("Connecting database...");
+        System.out.println("Connecting Video Game database...");
         try  {
             //System.out.println("Database connected!");
             return DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            throw new IllegalStateException("Cannot connect the Video game database!", e);
         }
     }
 
@@ -28,7 +28,7 @@ public class VideoGameRepo extends RepoInfo implements VideoGamesDAO {
 
     @Override
     public void saveGame(VideoGame videoGame, int userID) {
-        String query = "INSERT INTO videogame2(UserID,Title, Rating,Price, ReleaseDate, Console) values(?,?,?,?,?,?)";
+        String query = "INSERT INTO videogame(UserID,Title, Rating,Price, ReleaseDate, Console) values(?,?,?,?,?,?)";
         Connection conn = getConnection();
         try {
             // create the java statement
