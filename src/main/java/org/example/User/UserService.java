@@ -2,7 +2,8 @@ package org.example.User;
 
 import org.example.Exception.ValueExistsInDatabaseException;
 import org.example.Menu.UserMenu;
-import org.example.VideoGame.FakeVideoGameDAOImp;
+import org.example.Repo.VideoGameRepo;
+//import org.example.VideoGame.FakeVideoGameDAOImp;
 import org.example.VideoGame.VideoGameService;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class UserService {
 
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
-        this.videoGameService = new VideoGameService(new FakeVideoGameDAOImp());
+        this.videoGameService = new VideoGameService(new VideoGameRepo());
     }
 
     public UserDTO loginService() {

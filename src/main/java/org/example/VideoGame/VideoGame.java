@@ -20,6 +20,14 @@ public class VideoGame {
         this.console = console;
     }
 
+    public VideoGame(String title, String rating, double price, LocalDate releaseDate, String console){
+        this.title=title;
+        this.rating=rating;
+        this.price=price;
+        this.releaseDate=releaseDate;
+        this.console=console;
+    }
+
     public int getId() {
         return id;
     }

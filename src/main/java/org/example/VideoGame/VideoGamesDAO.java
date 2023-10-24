@@ -4,23 +4,23 @@ import java.util.List;
 
 public interface VideoGamesDAO {
 
-     void saveGame(VideoGame videoGame);
+     void saveGame(VideoGame videoGame, int userID);
 
-     VideoGame getVideoGameByID(int videoGameID);
+     VideoGame getVideoGameByID(int videoGameID, int userID);
 
-     VideoGame getVideoGameByTitle(String title);
+     VideoGame getVideoGameByTitle(String title, int userID);
 
-     List<VideoGame> getVideoGamesByRating(String rating);
+     List<VideoGame> getVideoGamesByRating(String rating, int UserID);
 
-     List<VideoGame> getVideoGamesByConsole(String console);
+     List<VideoGame> getVideoGamesByConsole(String console, int userID);
 
-     List<VideoGame> getAllVideoGames();
+     List<VideoGame> getAllVideoGames(int userID);
 
-     void deleteGameByID(int videoGameID);
+     void deleteGameByID(int videoGameID, int userID);
 
-     void deleteGameByTitle(String title);
+     void deleteGameByTitle(String title, int userID);
 
-     void deleteAllGames();
+     void deleteAllGames(int userID);
 
 
 }

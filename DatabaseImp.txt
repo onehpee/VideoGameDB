@@ -8,13 +8,13 @@ CREATE TABLE `user` (
   PRIMARY KEY (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `videogames` (
-  `Video Games ID` int NOT NULL,
+CREATE TABLE `videogame2` (
+  `VideoGamesID` int NOT NULL,
   `UserID` int NOT NULL,
   `Title` varchar(45) NOT NULL,
   `Rating` varchar(45) NOT NULL,
-  `Price` double(3,2) NOT NULL,
-  `Release Date` date NOT NULL,
+  `Price` double NOT NULL,
+  `ReleaseDate` date NOT NULL,
   `Console` varchar(45) NOT NULL,
   PRIMARY KEY (`Video Games ID`),
   KEY `UserID_idx` (`UserID`),

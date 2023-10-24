@@ -2,7 +2,8 @@ package org.example.VideoGame;
 
 import org.example.Menu.MenuFields;
 import org.example.Menu.UserMenu;
-import org.example.User.UserDTO;
+import org.example.Repo.UserRepo;
+import org.example.User.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import java.util.stream.Collectors;
 public class VideoGameService {
 
     private final VideoGamesDAO videoGames;
-    private int videoGameID = 0;
 
     public VideoGameService(VideoGamesDAO videoGames) {
         this.videoGames = videoGames;
@@ -27,7 +27,7 @@ public class VideoGameService {
         double price = VideoGameInputs.getPrice();
         LocalDate releaseDate = VideoGameInputs.getDateInput();
         String console = VideoGameInputs.getStringInput2(VideoGameInputFields.CONSOLE2);
-        videoGames.saveGame(new VideoGame(++videoGameID, title, rating, price, releaseDate, console));
+        videoGames.saveGame(new VideoGame(title, rating, price, releaseDate, console), userDTO.userID());
     }
 
     public void searchService(UserDTO userDTO, UserMenu userMenu) {
@@ -67,13 +67,15 @@ public class VideoGameService {
     private VideoGame searchByTitle(){
         System.out.println("\n*** Search (Title) ***");
         String title = VideoGameInputs.getStringInput2(VideoGameInputFields.TITLE);
-        return videoGames.getVideoGameByTitle(title);
+        int userId = UserInputs.getIDInput();
+        return videoGames.getVideoGameByTitle(title,userId);
     }
 
     private VideoGame searchByID(){
         System.out.println("\n*** Search (ID) ***");
         int id = VideoGameInputs.getVideoGameIDInput();
-        return videoGames.getVideoGameByID(id);
+        int userId = UserInputs.getIDInput();
+        return videoGames.getVideoGameByID(id, userId);
     }
 
     public void displayVideoGame(VideoGame videoGame) {
@@ -106,24 +108,24 @@ public class VideoGameService {
 
     private List<VideoGame> displayAllGames(int userID) {
         System.out.println("*** Display (All) ***\n");
-        return videoGames.getAllVideoGames();
+        return videoGames.getAllVideoGames(userID);
     }
     private List<VideoGame> displayGamesByRating(int userID) {
         System.out.println("*** Display (Rating) ***\n");
         String rating = VideoGameInputs.getStringInput2(VideoGameInputFields.RATING);
-        return videoGames.getVideoGamesByRating(rating);
+        return videoGames.getVideoGamesByRating(rating,userID);
     }
 
     private List<VideoGame> displayGamesByConsole(int userID) {
         System.out.println("*** Display (Console) ***\n");
         String console = VideoGameInputs.getStringInput2(VideoGameInputFields.CONSOLE2);
-        return videoGames.getVideoGamesByConsole(console);
+        return videoGames.getVideoGamesByConsole(console, userID);
     }
 
     private void deleteGameByID(int userID){
         System.out.println("*** Delete (ID) ***");
         int videoGameID = VideoGameInputs.getVideoGameIDInput();
-        VideoGame deleteGame = videoGames.getVideoGameByID(videoGameID);
+        VideoGame deleteGame = videoGames.getVideoGameByID(videoGameID,userID);
         if (deleteGame == null) return;
         System.out.println(deleteGame.getTitle() + " Has Been Removed From Database\n");
     }
@@ -131,15 +133,16 @@ public class VideoGameService {
     private void deleteGameByTitle(int userID){
         System.out.println("*** Delete (Title) ***");
         String videoGameTitle = VideoGameInputs.getStringInput2(VideoGameInputFields.TITLE);
-        VideoGame deleteGame = videoGames.getVideoGameByTitle(videoGameTitle);
+        VideoGame deleteGame = videoGames.getVideoGameByTitle(videoGameTitle, userID);
         if (deleteGame == null) return;
         System.out.println(deleteGame.getTitle() + " Has Been Removed From Database\n");
     }
 
     private void deleteAll() {
         System.out.println("*** Delete (All) ***");
-        if (videoGames.getAllVideoGames() == null) System.out.println("Database Is Empty\n");
-        videoGames.deleteAllGames();
+        int userID = UserInputs.getIDInput();
+        if (videoGames.getAllVideoGames(userID) == null) System.out.println("Database Is Empty\n");
+        videoGames.deleteAllGames(userID);
         System.out.println("\nDatabase Has Been Cleared\n");
     }
 }
