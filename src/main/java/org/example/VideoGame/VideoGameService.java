@@ -35,7 +35,7 @@ public class VideoGameService {
         while (choice != 3){
             choice = userMenu.menu(MenuFields.SEARCH);
             if (choice == 3) break;
-            VideoGame searchVideoGame = (choice == 1) ? searchByID() : searchByTitle();
+            VideoGame searchVideoGame = (choice == 1) ? searchByID(userDTO.userID()) : searchByTitle(userDTO.userID());
             displayVideoGame(searchVideoGame);
         }
     }
@@ -47,7 +47,7 @@ public class VideoGameService {
             if (choice == 4) break;
             else if (choice == 1) deleteGameByID(userDTO.userID());
             else if (choice == 2) deleteGameByTitle(userDTO.userID());
-            else deleteAll();
+            else deleteAll(userDTO.userID());
         }
     }
 
@@ -64,17 +64,15 @@ public class VideoGameService {
         }
     }
 
-    private VideoGame searchByTitle(){
+    private VideoGame searchByTitle(int userId){
         System.out.println("\n*** Search (Title) ***");
         String title = VideoGameInputs.getStringInput2(VideoGameInputFields.TITLE);
-        int userId = UserInputs.getIDInput();
         return videoGames.getVideoGameByTitle(title,userId);
     }
 
-    private VideoGame searchByID(){
+    private VideoGame searchByID(int userId){
         System.out.println("\n*** Search (ID) ***");
         int id = VideoGameInputs.getVideoGameIDInput();
-        int userId = UserInputs.getIDInput();
         return videoGames.getVideoGameByID(id, userId);
     }
 
@@ -127,6 +125,7 @@ public class VideoGameService {
         int videoGameID = VideoGameInputs.getVideoGameIDInput();
         VideoGame deleteGame = videoGames.getVideoGameByID(videoGameID,userID);
         if (deleteGame == null) return;
+        videoGames.deleteGameByID(videoGameID,userID);
         System.out.println(deleteGame.getTitle() + " Has Been Removed From Database\n");
     }
 
@@ -135,12 +134,12 @@ public class VideoGameService {
         String videoGameTitle = VideoGameInputs.getStringInput2(VideoGameInputFields.TITLE);
         VideoGame deleteGame = videoGames.getVideoGameByTitle(videoGameTitle, userID);
         if (deleteGame == null) return;
+        videoGames.deleteGameByTitle(videoGameTitle,userID);
         System.out.println(deleteGame.getTitle() + " Has Been Removed From Database\n");
     }
 
-    private void deleteAll() {
+    private void deleteAll(int userID) {
         System.out.println("*** Delete (All) ***");
-        int userID = UserInputs.getIDInput();
         if (videoGames.getAllVideoGames(userID) == null) System.out.println("Database Is Empty\n");
         videoGames.deleteAllGames(userID);
         System.out.println("\nDatabase Has Been Cleared\n");

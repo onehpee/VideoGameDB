@@ -18,7 +18,7 @@ DROP TABLE user;
 SELECT UserName FROM User as U WHERE EXISTS(SELECT UserName FROM user WHERE U.UserName="Mysterio619");
 Delete from user where UserName="Africanking";
 
-CREATE TABLE `videogame2` (
+CREATE TABLE `videogame` (
   `VideoGamesID` int NOT NULL auto_increment,
   `UserID` int NOT NULL,
   `Title` varchar(45) NOT NULL,
@@ -31,9 +31,10 @@ CREATE TABLE `videogame2` (
   CONSTRAINT `UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-select * from videogame2;
+select * from videogame;
 
 drop table videogame2;
 
 
 DROP TABLE videogames;
+select * from videogame where VideoGamesID=2 AND UserID=1;
