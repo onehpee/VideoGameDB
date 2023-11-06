@@ -15,13 +15,13 @@ public class ConnectionSingleton {
     private static Connection conn = null;
 
     private ConnectionSingleton() {
-        if(singleton != null)
-            throw new RuntimeException("Database Already Connected!");
     }
 
     public static Connection getConnectionSingleton(String sqlName) {
-        singleton = new ConnectionSingleton();
-        conn = getConnection(sqlName);
+        if (singleton == null){
+            singleton = new ConnectionSingleton();
+            conn = getConnection(sqlName);
+        }
         return conn;
     }
 
@@ -40,7 +40,7 @@ public class ConnectionSingleton {
         String username = dbInfo.get("onehpee_DBUsername");
         String password = dbInfo.get("onehpee_DBPassword");
 
-        System.out.println("Connecting to database...");
+        //System.out.println("Connecting to database...");
         try  {
             //System.out.println("Database connected!");
             return DriverManager.getConnection(url, username, password);

@@ -39,6 +39,7 @@ public class UserService {
         UserMenu menu = new UserMenu();
         int choice = 0;
         while (choice != 5){
+            System.out.println("\n********* BASED VIDEO GAME DATABASE **********\n");
             choice = menu.profileUserMenu(userDTO.userName());
             switchPath(choice, menu, userDTO);
         }

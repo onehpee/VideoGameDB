@@ -7,11 +7,12 @@ import org.example.User.UserInputs;
 import java.sql.*;
 import java.util.Map;
 
-public class UserRepo implements UserDAO{
+public class UserRepo extends RepoLogger implements UserDAO{
 
     private final Connection userConnection;
 
     public UserRepo() {
+        super(UserRepo.class.getName());
         userConnection = ConnectionSingleton.getConnectionSingleton("videogamedb2");
     }
 
@@ -67,6 +68,7 @@ public class UserRepo implements UserDAO{
             st.setString(2,passWord);
             ResultSet rs = st.executeQuery();
             if (rs.next()) userDTO = new UserDTO(rs.getInt(1), userName);
+            //infoLog(userName + " Found!");
             st.close();
         }catch (SQLException e){
             // System.out.println("Error Caught: " + e.printStackTrace(););

@@ -9,12 +9,14 @@ import org.example.User.*;
 import java.sql.SQLException;
 
 public class Main {
+
     public static void main(String[] args) {
+
         UserMenu userMenu = new UserMenu();
         UserService userService = new UserService(new UserRepo());
-        int mainMenuChoice = 0;
-        while (mainMenuChoice != 3){
-            mainMenuChoice = userMenu.menu(MenuFields.MAIN);
+        while (true){
+            System.out.println("********* BASED VIDEO GAME DATABASE **********");
+            int mainMenuChoice = userMenu.menu(MenuFields.MAIN);
             if (mainMenuChoice == 3) break;
             UserDTO currentUser = (mainMenuChoice == 1) ? userService.loginService() : userService.registerService();
             if (currentUser != null) userService.fullService(currentUser);

@@ -13,7 +13,7 @@ public class VideoGameRepo implements VideoGamesDAO {
     private final Connection connection;
 
     public VideoGameRepo(){
-        connection = ConnectionSingleton.getConnectionSingleton("videogamedb2");
+        this.connection = ConnectionSingleton.getConnectionSingleton("videogamedb2");
     }
 
     private VideoGame populateVideoGameObj(ResultSet rs) throws SQLException {
