@@ -2,8 +2,11 @@ package org.example;
 
 import org.example.Menu.MenuFields;
 import org.example.Menu.UserMenu;
+import org.example.Repo.ConnectionSingleton;
 import org.example.Repo.UserRepo;
 import org.example.User.*;
+
+import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,5 +19,11 @@ public class Main {
             UserDTO currentUser = (mainMenuChoice == 1) ? userService.loginService() : userService.registerService();
             if (currentUser != null) userService.fullService(currentUser);
         }
+        try {
+            ConnectionSingleton.closeConnectionSingleton();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

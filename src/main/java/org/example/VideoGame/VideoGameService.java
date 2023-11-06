@@ -2,15 +2,12 @@ package org.example.VideoGame;
 
 import org.example.Menu.MenuFields;
 import org.example.Menu.UserMenu;
-import org.example.Repo.UserRepo;
+import org.example.Repo.VideoGamesDAO;
 import org.example.User.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VideoGameService {
 

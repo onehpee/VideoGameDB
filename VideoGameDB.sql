@@ -20,15 +20,15 @@ Delete from user where UserName="Africanking";
 
 CREATE TABLE `videogame` (
   `VideoGamesID` int NOT NULL auto_increment,
-  `UserID` int NOT NULL,
+  `User_ID` int NOT NULL,
   `Title` varchar(45) NOT NULL,
   `Rating` varchar(45) NOT NULL,
   `Price` double NOT NULL,
   `ReleaseDate` date NOT NULL,
   `Console` varchar(45) NOT NULL,
   PRIMARY KEY (`VideoGamesID`),
-  KEY `UserID_idx` (`UserID`),
-  CONSTRAINT `UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`)
+  KEY `UserID_idx` (`User_ID`),
+  FOREIGN KEY (`User_ID`) REFERENCES `user` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 select * from videogame;

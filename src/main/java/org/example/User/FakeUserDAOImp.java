@@ -1,10 +1,11 @@
 package org.example.User;
 
+import org.example.Repo.UserDAO;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class FakeUserDAOImp implements UserDAO{
+public class FakeUserDAOImp implements UserDAO {
 
     private final List<User> userList;
 

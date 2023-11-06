@@ -1,4 +1,7 @@
-package org.example.User;
+package org.example.Repo;
+
+import org.example.User.User;
+import org.example.User.UserDTO;
 
 public interface UserDAO {
 

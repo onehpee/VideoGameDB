@@ -1,4 +1,6 @@
-package org.example.VideoGame;
+package org.example.Repo;
+
+import org.example.VideoGame.VideoGame;
 
 import java.util.List;
 
