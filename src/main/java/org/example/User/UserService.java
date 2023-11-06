@@ -2,12 +2,10 @@ package org.example.User;
 
 import org.example.Exception.ValueExistsInDatabaseException;
 import org.example.Menu.UserMenu;
+import org.example.Repo.UserDAO;
 import org.example.Repo.VideoGameRepo;
 //import org.example.VideoGame.FakeVideoGameDAOImp;
 import org.example.VideoGame.VideoGameService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserService {
     private final UserDAO userDAO;
@@ -41,6 +39,7 @@ public class UserService {
         UserMenu menu = new UserMenu();
         int choice = 0;
         while (choice != 5){
+            System.out.println("\n********* BASED VIDEO GAME DATABASE **********\n");
             choice = menu.profileUserMenu(userDTO.userName());
             switchPath(choice, menu, userDTO);
         }
