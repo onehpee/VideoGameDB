@@ -16,6 +16,6 @@ jobs:
          with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
            destination_branch: "main"
-           pr_title: "Please Approve The Following Changes From " ${{ github.ref_name }}
+           pr_title: ${{ github.ref_name }}
            pr_reviewer: "onehpee"
            pr_draft: true
