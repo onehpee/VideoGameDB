@@ -1,0 +1,21 @@
+name: Create Pull Request Flow
+
+on:
+  push:
+    branches-ignore:
+        - main
+
+jobs:
+   pull_request:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout repo
+         uses: actions/checkout@v4
+       - name: Create pull request
+         uses: repo-sync/pull-request@v2
+         with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           destination_branch: "main"
+           pr_title: "Please Approve The Following Changes From" + ${{ github.ref_name }}
+           pr_reviewer: "onehpee"
+           pr_draft: true
